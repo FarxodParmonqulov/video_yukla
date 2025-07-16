@@ -1,6 +1,7 @@
 import os
 import re
 import yt_dlp
+import asyncio
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     ApplicationBuilder,
@@ -211,12 +212,15 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CallbackQueryHandle
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-def main():
+async def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     app.add_handler(CallbackQueryHandler(handle_callback))
 
     print("🤖 Bot ishga tushdi...")
-    app.run_polling()
+    await app.run_polling()
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
