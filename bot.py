@@ -207,20 +207,12 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await msg.edit_text("❌ MP3 yuklab bo'lmadi. Iltimos, qayta urinib ko'ring.")
 
 # 🚀 Botni ishga tushirish
+from telegram.ext import ApplicationBuilder, MessageHandler, CallbackQueryHandler, ContextTypes, filters
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
 def main():
-    BOT_TOKEN = "8086222828:AAFm5Lg5CPghCdo_DTVwy88EuDUJFqfBtIk"
-
-    # Fayllar uchun papka yaratish
-    if not os.path.exists("downloads"):
-        os.makedirs("downloads")
-
-    app = ApplicationBuilder().token(BOT_TOKEN).request(
-        HTTPXRequest(
-            read_timeout=120,
-            connect_timeout=60,
-            write_timeout=120
-        )
-    ).build()
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     app.add_handler(CallbackQueryHandler(handle_callback))
@@ -228,5 +220,3 @@ def main():
     print("🤖 Bot ishga tushdi...")
     app.run_polling()
 
-if __name__ == '__main__':
-    main()
