@@ -26,6 +26,7 @@ def download_video(url, filename):
     ydl_opts = {
         'outtmpl': filename,
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
+        'ffmpeg_location': '/usr/bin/ffmpeg',
         'quiet': True,
         'cookies': 'cookies.txt',
         'max_filesize': 50 * 1024 * 1024,
