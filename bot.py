@@ -27,6 +27,7 @@ def download_video(url, filename):
         'outtmpl': filename,
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
         'quiet': True,
+        'cookies': 'cookies.txt',
         'max_filesize': 50 * 1024 * 1024,
         'merge_output_format': 'mp4'
     }
@@ -47,6 +48,7 @@ def download_audio(url, filename):
         'format': 'bestaudio/best',
         'outtmpl': filename,
         'quiet': True,
+        'cookies': 'cookies.txt',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
